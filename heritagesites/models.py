@@ -39,7 +39,7 @@ class Planet(models.Model):
     planet_id = models.AutoField(primary_key=True)
     planet_name = models.CharField(unique=True, max_length=50)
     unsd_name = models.CharField(null=True, max_length=100)
-    location = models.ForeignKey('Location', models.DO_NOTHING)
+    location_id = models.ForeignKey('Location', models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -286,7 +286,7 @@ class Location(models.Model):
     #intermediate_region_id = models.SmallIntegerField(null=True)
 
     #commented out to see if these foreign keys work
-    planet = models.ForeignKey('Planet', models.DO_NOTHING)
+    planet_id= models.ForeignKey('Planet', models.DO_NOTHING) #added _id to name to clear out a naming error Location.planet vs. Planet.location.
     region = models.ForeignKey('Region', models.DO_NOTHING)
     sub_region = models.ForeignKey('SubRegion', models.DO_NOTHING)
     intermediate_region = models.ForeignKey('IntermediateRegion', models.DO_NOTHING)

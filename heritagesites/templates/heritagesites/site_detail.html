@@ -1,0 +1,17 @@
+{% extends 'heritagesites/base.html' %}
+
+{% block content %}
+
+<!-- safe filter on for raw HTML stored in database -->
+
+<h2>{{site.site_name | safe}}</h2>
+<p><b>Heritage Site ID:</b> {{site.heritage_site_id | safe}}</p>
+<p><b>Decription:</b> {{site.description | safe}}</p>
+<p><b>Justification:</b>  {{site.justification | safe}}</p>
+<p><b>Date Inscribed:</b>  {{site.date_inscribed | safe}}</p>
+<p><b>Longitude:</b>  {{site.longitude | safe}}</p>
+<p><b>Latitude:</b>  {{site.latitude | safe}}</p>
+<p><b>Area Hectares:</b>  {{site.area_hectares | safe}}</p>
+<p><b>Category Name:</b>  {{site.heritage_site_category| safe}}</p>
+
+{% endblock content %}

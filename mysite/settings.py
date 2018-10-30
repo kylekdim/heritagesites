@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'heritagesites.apps.HeritagesitesConfig',
+    'test_without_migrations',
 ]
+
+# Add a custom test runner for converting unmanaged models to managed before
+# running a test and then revert the effect afterwards.
+
+TEST_RUNNER = 'heritagesites.utils.UnManagedModelTestRunner'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +61,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'], #added this based on week 6 slides
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
