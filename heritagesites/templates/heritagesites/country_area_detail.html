@@ -1,0 +1,24 @@
+{% extends 'heritagesites/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<!-- safe filter on for raw HTML stored in database -->
+
+	<h2>{{country.country_area_name | safe}}</h2>
+	<p><b>M49 Code:</b> {{country.m49_code | safe}}</p>
+	<p><b>ISO Alpha3 Code:</b> {{country.iso_alpha3_code | safe}}</p>
+	<p><b>Region Name:</b> {{region.region_name | safe}}</p>
+	<p><b>Subregion Name:</b> {{sub_region.sub_region_name | safe}}</p>
+	<p><b>Intermediate Region Name:</b> {{intermediate_region.intermediate_region_name | safe}}</p>
+	<p><b>Dev Status:</b> {{dev_status.dev_status_name | safe}}</p>
+
+
+
+<!--, m49_code, iso_alpha3_code, region.region_name, sub_region.sub_region_name, intermediate_region.intermediate_region_name, dev_status.dev_status_name -->
+
+{% else %}
+   <a href="{% url 'login' %}">Log in</a>
+{% endif %}
+{% endblock content %}

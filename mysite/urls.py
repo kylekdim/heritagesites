@@ -14,9 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import url
+#from django.conf.urls import url
+#Above commented out for HW7
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.urls import path, include
 
@@ -29,8 +31,19 @@ from django.urls import path, include
 #] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 #URL Patterns commented out above for HW6
 
+#These lines below commented out as a part of HW7
+#urlpatterns = [
+#    path('', lambda r: HttpResponseRedirect('heritagesites/')),
+#    path('admin/', admin.site.urls),
+#    path('heritagesites/', include('heritagesites.urls')),
+#]
+
 urlpatterns = [
     path('', lambda r: HttpResponseRedirect('heritagesites/')),
     path('admin/', admin.site.urls),
+    path('auth/', include('social_django.urls', namespace='social')),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL},
+         name='logout'),
     path('heritagesites/', include('heritagesites.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

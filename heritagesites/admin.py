@@ -124,15 +124,15 @@ class SubRegionAdmin(admin.ModelAdmin):
 
 @admin.register(models.Location)
 class LocationAdmin(admin.ModelAdmin):
-	fields = ['location_id', 'planet_id', 'region_id', 'sub_region_id', 'intermediate_region_id']
-	list_display = ['location_id', 'planet_id', 'region_id', 'sub_region_id', 'intermediate_region_id']
+	fields = ['location_id', 'region_id', 'sub_region_id', 'intermediate_region_id'] #'planet_id' was here, changing this fixed a long-standing naming issue with location and planet in the models.py in hw8
+	list_display = ['location_id', 'region_id', 'sub_region_id', 'intermediate_region_id'] #'planet_id' was here, changing this fixed a long-standing naming issue with location and planet in the models.py in hw8
 	ordering = ['location_id']
 
 # admin.site.register(models.Location)
 
 @admin.register(models.Planet)
 class PlanetAdmin(admin.ModelAdmin):
-	fields = ['planet_id', 'planet_name', 'unsd_name']
+	fields = ['planet_id', 'planet_name', 'unsd_name', 'location_id']
 	list_display = ['planet_id', 'planet_name', 'unsd_name']
 	ordering = ['planet_name']
 

@@ -27,6 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+# LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1055681177459-cdopds7o98dh597u8pc30mvaquts4jfa.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '80p6PWAgzkNI5_ENGPOmYhFr'
 
 # Application definition
 
@@ -38,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'heritagesites.apps.HeritagesitesConfig',
+    'social_django', #added in HW7 for oauth login
+    'crispy_forms', #added in HW8 for forms
     'test_without_migrations',
 ]
 
@@ -54,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -69,10 +82,29 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', #this line and next line added for HW7                   
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4' #added based on hw8
+
+
+# Authentication backends
+# Must include the default Django Auth ModelBackend for the admin site
+
+AUTHENTICATION_BACKENDS = (
+    # 'social_core.backends.open_id.OpenIdAuth',
+    # 'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    # 'social_core.backends.google.GoogleOAuth',
+    # 'social_core.backends.twitter.TwitterOAuth',
+    # 'social_core.backends.yahoo.YahooOpenId',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 

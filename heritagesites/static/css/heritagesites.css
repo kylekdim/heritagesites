@@ -26,12 +26,12 @@ nav {
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
     color: #ffffff;
-    padding: 0.8rem 1rem;
+    /*padding: 0.8rem 1rem;*/
 }
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
     color: #f64c72;
-    padding: 1rem 1rem;
+    /*padding: 1rem 1rem;*/
 }
 /* change the color of active or hovered links */
 .navbar-custom .nav-item.active .nav-link,
@@ -57,7 +57,7 @@ nav {
 .pagination > li.page-item.active {
     background-color: #553d67;
     color: #99738e;
-    padding: 0.25rem 0.75rem;
+    /*padding: 0.25rem 0.75rem;*/
 }
 
 /*
@@ -70,7 +70,7 @@ main {
 
 .container-fluid {
     background-color: transparent;
-    padding: 0.5rem 0.5rem;
+    /*padding: 0.5rem 0.5rem;*/
 }
 
 /*
@@ -79,7 +79,7 @@ main {
 
 footer {
     background-color: #553d67;
-    padding: 0.8rem 1rem;
+    /*padding: 0.8rem 1rem;*/
 }
 
 footer a:link {

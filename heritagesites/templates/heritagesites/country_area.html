@@ -1,0 +1,37 @@
+{% extends 'heritagesites/base.html' %}
+
+
+{% block content %}
+  {% if user.is_authenticated %}
+
+    <article>
+      <header>
+        <h2>UNESCO Heritage Sites</h2>
+      </header>
+
+      <!-- WARNING: INCLUDE TAG HAS TAKEN PLACE OF NAV CODE ON EACH PAGE -->
+      {% include '/Users/beefbeverly/Documents/GitHub/heritagesites/heritagesites/templates/heritagesites/pagination.html' %}
+
+      {% if countries %} <!-- if countries view-class -->
+      <ul>
+
+        {% for country in countries %} 
+        <!--created a for loop here to create entries for all countries. -->
+    
+        <!-- safe filter on for raw HTML stored in database -->
+        <li><a href="{% url 'country_detail' country.pk %}">{{ country.country_area_name | safe }}</a></li>
+        {% endfor %}
+
+
+      </ul>
+      {% else %}
+      <p>No countries are available to view.</p>
+      {% endif %}
+
+      <p>page count: {{ countries.count }}</p>
+    </article>
+{% else %}
+<a href="{% url 'login' %}">Log in</a>
+{% endif %}
+{% endblock content %}}
+

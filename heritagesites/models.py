@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 
 from django.db import models
+from django.urls import reverse #Added in step 3.2 of HW8
 
 
 class CountryArea(models.Model):
@@ -39,7 +40,7 @@ class Planet(models.Model):
     planet_id = models.AutoField(primary_key=True)
     planet_name = models.CharField(unique=True, max_length=50)
     unsd_name = models.CharField(null=True, max_length=100)
-    location_id = models.ForeignKey('Location', models.DO_NOTHING)
+    location = models.ForeignKey('Location', models.DO_NOTHING) 
 
     class Meta:
         managed = False
@@ -99,7 +100,7 @@ class HeritageSite(models.Model):
     site_name = models.CharField(unique=True, max_length=255)
     description = models.TextField()
     justification = models.TextField(blank=True, null=True)
-    date_inscribed = models.TextField(blank=True, null=True)  # This field type is a guess.
+    date_inscribed = models.IntegerField(blank=True, null=True)  #Changed to int field for HW8
     longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
     area_hectares = models.FloatField(blank=True, null=True)
@@ -118,6 +119,10 @@ class HeritageSite(models.Model):
 
     def __str__(self):
         return self.site_name
+
+    def get_absolute_url(self): #this method added as a part of step 3.2 of HW8
+        # return reverse('site_detail', args=[str(self.id)])
+        return reverse('site_detail', kwargs={'pk': self.pk})
 
     def country_area_display(self):
         """Create a string for country_area. This is required to display in the Admin view."""
@@ -286,7 +291,7 @@ class Location(models.Model):
     #intermediate_region_id = models.SmallIntegerField(null=True)
 
     #commented out to see if these foreign keys work
-    planet_id= models.ForeignKey('Planet', models.DO_NOTHING) #added _id to name to clear out a naming error Location.planet vs. Planet.location.
+    #planet = models.ForeignKey('Planet', models.DO_NOTHING) #added _entry to name to clear out a naming error Location.planet vs. Planet.location. /// on 11/11/18 commented this out to get rid of naming conflict error between planet and location
     region = models.ForeignKey('Region', models.DO_NOTHING)
     sub_region = models.ForeignKey('SubRegion', models.DO_NOTHING)
     intermediate_region = models.ForeignKey('IntermediateRegion', models.DO_NOTHING)
