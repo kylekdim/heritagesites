@@ -1,0 +1,31 @@
+{% extends 'heritagesites/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="px-2 py-2" style="border:1px solid #8E8D8A;">
+        <form action="" method="get">
+          {{ filter.form|crispy }}
+          <!-- add a submit button -->
+           <button type="submit" class="btn btn-outline-success">Add</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      {% for site in object_list %}
+        <h4><!-- add a link to the detail page -->{% url ... %}</h4>
+
+        <!-- add the country_area_names and description template tags -->
+        {% if ... %}
+        {{ site.country_area_names }}
+        {% endif %}
+
+    {% empty %}
+      Select one or more filters relevant to your search and then click "filter".
+    {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

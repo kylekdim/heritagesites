@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'heritagesites.apps.HeritagesitesConfig',
     'social_django', #added in HW7 for oauth login
     'crispy_forms', #added in HW8 for forms
+    'django_filters',
     'test_without_migrations',
 ]
 

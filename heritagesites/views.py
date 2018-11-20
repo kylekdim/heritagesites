@@ -25,6 +25,11 @@ from crispy_forms.compatibility import string_types
 from .models import HeritageSite, CountryArea, HeritageSiteJurisdiction #MAKE SURE TO ADD ALL MODELS HW8
 from .forms import HeritageSiteForm #HW8 for forms
 
+#Added in HW9 below
+import django_filters
+from django_filters.views import FilterView
+from .filters import HeritageSiteFilter
+
 
 def index(request):
 	return HttpResponse("Hello, world. You're at the UNESCO Heritage Sites index page.")
@@ -189,3 +194,7 @@ class SiteDeleteView(generic.DeleteView):
 		self.object.delete()
 
 		return HttpResponseRedirect(self.get_success_url())
+
+class SiteFilterView(FilterView):
+	filterset_class = HeritageSiteFilter
+	template_name = 'heritagesites/site_filter.html'
